@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 15px;
+  width: 500px;
+  height: 100%;
+}
+.div {
+  display: flex;
+  flex-direction: column;
+}
+.field {
+  padding: 5px;
+  font-size: 16px;
+}
+.btn {
+  border: 1px solid black;
+  width: 129px;
+  margin-top: 15px;
+  background-color: #8a8ab7;
+  border-color: chartreuse;
+}
+.btn:focus {
+  border: 1px solid rgb(189, 189, 26);
+  background-color: #2626cb;
+}
+.btn:hover {
+  border: 1px solid rgb(189, 189, 26);
+  background-color: #2626cb;
+}
+.span {
+  color: red;
+  margin: 0;
+  padding: 0;
+}

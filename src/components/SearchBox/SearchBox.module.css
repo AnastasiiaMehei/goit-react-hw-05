@@ -1,0 +1,9 @@
+.div {
+  margin-bottom: 25px;
+}
+.input {
+  width: 100%;
+}
+.input:hover {
+  border: 2px solid salmon;
+}

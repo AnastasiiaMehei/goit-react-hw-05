@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(25% - 10px);
+  margin-bottom: 20px;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.li {
+  padding: 10px;
+  box-sizing: border-box;
+}
