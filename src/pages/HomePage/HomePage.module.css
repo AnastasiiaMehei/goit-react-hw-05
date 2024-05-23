@@ -1,0 +1,11 @@
+.title {
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: black;
+  font-style: oblique;
+  border: 1px solid darkgray;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+    -1px -1px 5px rgba(255, 255, 255, 0.3);
+}
