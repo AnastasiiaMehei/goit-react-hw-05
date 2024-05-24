@@ -10,3 +10,34 @@
   padding-right: 8px;
   width: 25px;
 }
+.div {
+  margin: 15px;
+  display: flex;
+  border: 2px solid grey;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+    -1px -1px 5px rgba(255, 255, 255, 0.3);
+}
+.list li {
+  margin-bottom: 15px;
+  font-size: 25px;
+  color: black;
+}
+.title {
+  font-size: 35px;
+  font-weight: 700;
+}
+.userScore {
+  font-weight: 300;
+}
+.overview,
+.genres {
+  font-weight: 500;
+}
+.genresList {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+.genresList li {
+  margin-right: 15px;
+}

@@ -3,20 +3,11 @@ import { GoArrowLeft } from "react-icons/go";
 import css from "./MovieDetailsPage.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import getMoviesDetails from "../../../movieDetails-api";
-// import MoviesPage from "../MoviesPage/MoviesPage";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   //   const [loading, setLoading] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
-  //   useEffect(() => {
-  //     getMoviesDetails(movieId)
-  //       .then((data) => setMovieDetails(data))
-  //       .catch((error) =>
-  //         console.error("Помилка при отриманні деталей фільму:", error)
-  //       )
-  //       .finally(() => setLoading(false));
-  //   }, [movieId]);
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
@@ -45,18 +36,34 @@ export default function MovieDetailsPage() {
         Go back
       </button>
       {movieDetails && (
-        <div>
-          <p>{movieDetails.poster_path}</p>
-          <p>{movieDetails.title}</p>
-          <p>User score: {movieDetails.popularity}%</p>
-          <p>Overview</p>
-          <p>{movieDetails.overview}</p>
-          <p>Genres</p>
-          <p>{movieDetails.genres}</p>
+        <div className={css.div}>
+          <ul className={css.image}>
+            <li>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
+                alt="{movieDetails.original_title}"
+              />
+            </li>
+          </ul>
+          <ul className={css.list}>
+            <li className={css.title}>
+              {movieDetails.title} ({movieDetails.release_date.split("-")[0]})
+            </li>
+            <li className={css.userScore}>
+              User score: {Math.round(movieDetails.vote_average)}%
+            </li>
+            <li className={css.overview}>Overview</li>
+            <li>{movieDetails.overview}</li>
+            <li className={css.genres}>Genres</li>
+            <ul className={css.genresList}>
+              {movieDetails.genres.map((genre) => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
+          </ul>
         </div>
       )}
       {/* {loading && <b>No info. Try again...</b>} */}
-      {/* {movieDetails && <MoviesPage movieDetails={movieDetails} />} */}
     </div>
   );
 }
