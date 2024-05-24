@@ -1,8 +1,9 @@
 import axios from "axios";
 import { GoArrowLeft } from "react-icons/go";
 import css from "./MovieDetailsPage.module.css";
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+// import MovieCast from "../../components/MovieCast/MovieCast";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
@@ -49,7 +50,7 @@ export default function MovieDetailsPage() {
               {movieDetails.title} ({movieDetails.release_date.split("-")[0]})
             </li>
             <li className={css.userScore}>
-              User score: {Math.round(movieDetails.vote_average)}%
+              User score: {Math.round(movieDetails.vote_average * 10)}%
             </li>
             <li className={css.overview}>Overview</li>
             <li>{movieDetails.overview}</li>
@@ -62,6 +63,15 @@ export default function MovieDetailsPage() {
           </ul>
         </div>
       )}
+      <div className={css.listAdditionalInfo}>
+        <li className={css.additionalInfo}>Additional information</li>
+        <nav className={css.navLink}>
+          <Link to="cast">Cast</Link>
+          <Link to="reviews">Reviews</Link>
+        </nav>
+      </div>
+
+      <Outlet />
       {/* {loading && <b>No info. Try again...</b>} */}
     </div>
   );
