@@ -2,13 +2,19 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import css from "./MovieCast.module.css";
+import Loader from "../Loader/Loader";
+import { ErrorMessage } from "formik";
 export default function MovieCast() {
   const { movieId } = useParams();
   const [movieCast, setMovieCast] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchMovieCast = async () => {
       try {
+        setIsLoading(true);
+        setIsError(false);
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${movieId}/credits`,
           {
@@ -19,7 +25,9 @@ export default function MovieCast() {
         );
         setMovieCast(response.data.cast);
       } catch (error) {
-        console.error("Failed to fetch movie cast:", error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -30,6 +38,8 @@ export default function MovieCast() {
 
   return (
     <div className={css.divMovieCast}>
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
       {movieCast.map((actor) => (
         <div className={css.actor} key={actor.id}>
           <img

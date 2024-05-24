@@ -3,14 +3,19 @@ import { GoArrowLeft } from "react-icons/go";
 import css from "./MovieDetailsPage.module.css";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loader from "../../components/Loader/Loader";
+import { ErrorMessage } from "formik";
 // import MovieCast from "../../components/MovieCast/MovieCast";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
+        setIsLoading(true);
+        setIsError(false);
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${movieId}`,
           {
@@ -21,16 +26,19 @@ export default function MovieDetailsPage() {
         );
         setMovieDetails(response.data);
       } catch (error) {
-        console.error("Failed to fetch movie details:", error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     if (movieId) {
       fetchMovieDetails();
     }
   }, [movieId]);
   return (
     <div>
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
       <button className={css.button}>
         <GoArrowLeft className={css.icon} />
         Go back
@@ -72,7 +80,6 @@ export default function MovieDetailsPage() {
       </div>
 
       <Outlet />
-      {/* {loading && <b>No info. Try again...</b>} */}
     </div>
   );
 }

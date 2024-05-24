@@ -1,0 +1,21 @@
+.div {
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 400px;
+  height: 50px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+    -1px -1px 5px rgba(255, 255, 255, 0.3);
+  margin: 20px;
+}
+.button {
+  width: 150px;
+  border: 1px solid grey;
+  background-color: bisque;
+  font-size: 25px;
+}
