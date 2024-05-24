@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-  //   const [loading, setLoading] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
 
   useEffect(() => {

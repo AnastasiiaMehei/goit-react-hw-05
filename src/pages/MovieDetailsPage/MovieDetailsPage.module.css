@@ -11,7 +11,7 @@
   width: 25px;
 }
 .div {
-  margin: 15px;
+  margin: 20px;
   display: flex;
   border: 2px solid grey;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
@@ -21,6 +21,9 @@
   margin-bottom: 15px;
   font-size: 25px;
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .title {
   font-size: 35px;
@@ -39,5 +42,8 @@
   padding: 0;
 }
 .genresList li {
-  margin-right: 15px;
+  margin-right: 25px;
+}
+.list li {
+  font-size: 35px;
 }

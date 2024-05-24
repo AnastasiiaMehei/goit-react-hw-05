@@ -2,9 +2,9 @@
   display: flex;
   gap: 12px;
   list-style: none;
-  padding: 15px;
+  padding: 0;
   margin: 15px;
-  font-size: 45px;
+  font-size: 35px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
     -1px -1px 5px rgba(255, 255, 255, 0.3);
 }
