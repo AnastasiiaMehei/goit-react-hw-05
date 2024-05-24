@@ -8,7 +8,7 @@ const getMovies = async () => {
       headers: {
         accept: "application/json",
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZGQ1ZGIxNWMxNDFmYTgwNGUwMjZmM2NjYmU3YTIxNSIsInN1YiI6IjY2NGRkNWYwNTg1ZDU0NDNhMjYzOTIyZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Sk4b0T0CzGsfgq4lgFbXsKROMLQ9iboWwXr1u1BjiCA",
+          "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZGQ1ZGIxNWMxNDFmYTgwNGUwMjZmM2NjYmU3YTIxNSIsInN1YiI6IjY2NGRkNWYwNTg1ZDU0NDNhMjYzOTIyZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Sk4b0T0CzGsfgq4lgFbXsKROMLQ9iboWwXr1u1BjiCA",
       },
     });
     return response.data.results;
