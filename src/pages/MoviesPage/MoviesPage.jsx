@@ -1,7 +1,13 @@
-export default function MoviesPage() {
+export default function MoviesPage(movieDetails) {
   return (
     <div>
-      <h1>MoviesPage</h1>
+      <p>{movieDetails.poster_path}</p>
+      <p>{movieDetails.title}</p>
+      <p>User score: {movieDetails.popularity}%</p>
+      <p>Overview</p>
+      <p>{movieDetails.overview}</p>
+      <p>Genres</p>
+      <p>{movieDetails.genres}</p>
     </div>
   );
 }
