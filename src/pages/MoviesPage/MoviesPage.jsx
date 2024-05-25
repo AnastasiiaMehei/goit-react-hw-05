@@ -5,11 +5,19 @@ import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
 import { ErrorMessage } from "formik";
 export default function MoviesPage() {
+  const [inputValue, setInputValue] = useState("");
   const [searchMovie, setSearchMovie] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+  const handleSearchClick = () => {
+    setSearchMovie(inputValue);
+    setShowResults(true);
+  };
   useEffect(() => {
     const searchMovies = async () => {
       try {
@@ -35,9 +43,7 @@ export default function MoviesPage() {
       searchMovies();
     }
   }, [searchMovie]);
-  const handleSearchClick = () => {
-    setShowResults(true);
-  };
+
   return (
     <div>
       {isLoading && <Loader />}
@@ -46,14 +52,14 @@ export default function MoviesPage() {
         <input
           className={css.input}
           type="text"
-          value={searchMovie}
-          onChange={(e) => setSearchMovie(e.target.value)}
+          value={inputValue}
+          onChange={handleInputChange}
         />
         <button className={css.button} onClick={handleSearchClick}>
           Search
         </button>
       </div>
-      {showResults && <MovieList movies={filteredMovies} />}
+      {showResults && <MovieList movies={filteredMovies} />}{" "}
     </div>
   );
 }
