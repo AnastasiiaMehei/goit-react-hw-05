@@ -2,12 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import css from "./MoviesPage.module.css";
 import Loader from "../../components/Loader/Loader";
+import MovieList from "../../components/MovieList/MovieList";
 import { ErrorMessage } from "formik";
 export default function MoviesPage() {
   const [searchMovie, setSearchMovie] = useState("");
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   useEffect(() => {
     const searchMovies = async () => {
       try {
@@ -33,6 +35,9 @@ export default function MoviesPage() {
       searchMovies();
     }
   }, [searchMovie]);
+  const handleSearchClick = () => {
+    setShowResults(true);
+  };
   return (
     <div>
       {isLoading && <Loader />}
@@ -44,16 +49,11 @@ export default function MoviesPage() {
           value={searchMovie}
           onChange={(e) => setSearchMovie(e.target.value)}
         />
-        <button className={css.button}>Search</button>
+        <button className={css.button} onClick={handleSearchClick}>
+          Search
+        </button>
       </div>
-      <div>
-        {filteredMovies.map((movie) => (
-          <div key={movie.id}>
-            {/* <Link to="/movies/:movieId" />
-            <Outlet /> */}
-          </div>
-        ))}
-      </div>
+      {showResults && <MovieList movies={filteredMovies} />}
     </div>
   );
 }

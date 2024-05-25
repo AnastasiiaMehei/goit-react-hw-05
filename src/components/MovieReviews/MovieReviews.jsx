@@ -40,12 +40,18 @@ export default function MovieReviews() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {movieReviews?.map((review) => (
-        <div className={css.review} key={review.id}>
-          <p className={css.p}>Author: {review.author}</p>
-          <p>{review.content}</p>
-        </div>
-      ))}
+      {movieReviews && movieReviews.length > 0 ? (
+        movieReviews.map((review) => (
+          <div className={css.review} key={review.id}>
+            <p className={css.p}>Author: {review.author}</p>
+            <p>{review.content}</p>
+          </div>
+        ))
+      ) : (
+        <p className={css.withoutReviews}>
+          We do not have any reviews for this movie.
+        </p>
+      )}
     </div>
   );
 }
