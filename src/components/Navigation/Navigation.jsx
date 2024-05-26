@@ -6,16 +6,17 @@ const getLinkClass = ({ isActive }) => {
 };
 export default function Navigation() {
   const location = useLocation();
+  const backLinkHref = location.state ?? "/";
   return (
     <nav>
       <ul className={css.container}>
         <li>
-          <NavLink to="/" className={getLinkClass} state={location}>
+          <NavLink to="/" className={getLinkClass}>
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/movies" className={getLinkClass} state={location}>
+          <NavLink to="/movies" state={backLinkHref} className={getLinkClass}>
             Movies
           </NavLink>
         </li>
