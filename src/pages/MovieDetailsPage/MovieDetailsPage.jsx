@@ -1,7 +1,13 @@
 import axios from "axios";
 import { GoArrowLeft } from "react-icons/go";
 import css from "./MovieDetailsPage.module.css";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -11,7 +17,7 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
-  const backLinkRef = useRef(location.state ?? "/");
+  const backLinkRef = useRef(location.state?.from || "/");
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -41,7 +47,7 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <Link to="/movies">
+      <Link to={backLinkRef.current}>
         <button className={css.button}>
           <GoArrowLeft className={css.icon} />
           Go back
@@ -79,12 +85,8 @@ export default function MovieDetailsPage() {
       <div className={css.listAdditionalInfo}>
         <li className={css.additionalInfo}>Additional information</li>
         <nav className={css.navLink}>
-          <Link to="cast" state={backLinkRef.current}>
-            Cast
-          </Link>
-          <Link to="reviews" state={backLinkRef.current}>
-            Reviews
-          </Link>
+          <NavLink to="cast">Cast</NavLink>
+          <NavLink to="reviews">Reviews</NavLink>
         </nav>
       </div>
 
