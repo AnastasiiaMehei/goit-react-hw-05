@@ -52,3 +52,9 @@ ul,
 ol {
   list-style-type: none;
 }
+.loading {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  color: rgba(253, 168, 137, 1);
+}

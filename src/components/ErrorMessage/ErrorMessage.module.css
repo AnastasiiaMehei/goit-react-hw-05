@@ -1,5 +1,7 @@
 .p {
   display: flex;
   justify-content: center;
-  color: black;
+  color: rgba(253, 168, 137, 1);
+  font-size: 25px;
+  font-weight: 700;
 }

@@ -8,7 +8,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
@@ -60,7 +60,6 @@ export default function MovieDetailsPage() {
           Go back
         </button>
       </Link>
-
       {movieDetails && (
         <div className={css.div}>
           <ul className={css.image}>
@@ -100,8 +99,9 @@ export default function MovieDetailsPage() {
           </NavLink>
         </nav>
       </div>
-
-      <Outlet />
+      <Suspense fallback={<div>Loading sub component...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }

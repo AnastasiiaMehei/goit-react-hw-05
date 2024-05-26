@@ -10,8 +10,8 @@
   font-size: 45px;
   box-shadow: 3px 3px 5px rgba(232, 24, 24, 0.3),
     -1px -1px 5px rgba(255, 255, 255, 0.3);
-  background: linear-gradient(to bottom, red, black);
   color: white;
+  background-image: linear-gradient(135deg, #fff5c3 10%, #9452a5 100%);
 }
 
 .link {
@@ -21,8 +21,8 @@
 }
 .link:hover,
 .link:focus {
-  color: black;
+  color: grey;
 }
 .active {
-  color: orangered;
+  color: violet;
 }
