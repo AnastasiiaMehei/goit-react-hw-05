@@ -85,8 +85,12 @@ export default function MovieDetailsPage() {
       <div className={css.listAdditionalInfo}>
         <li className={css.additionalInfo}>Additional information</li>
         <nav className={css.navLink}>
-          <NavLink to="cast">Cast</NavLink>
-          <NavLink to="reviews">Reviews</NavLink>
+          <NavLink to="cast" state={backLinkRef.current}>
+            Cast
+          </NavLink>
+          <NavLink to="reviews" state={backLinkRef.current}>
+            Reviews
+          </NavLink>
         </nav>
       </div>
 
