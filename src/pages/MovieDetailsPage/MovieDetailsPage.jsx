@@ -1,16 +1,17 @@
 import axios from "axios";
 import { GoArrowLeft } from "react-icons/go";
 import css from "./MovieDetailsPage.module.css";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
-import { ErrorMessage } from "formik";
-// import MovieCast from "../../components/MovieCast/MovieCast";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const location = useLocation();
+  const backLinkHref = location.state;
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
@@ -39,10 +40,13 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <button className={css.button}>
-        <GoArrowLeft className={css.icon} />
-        Go back
-      </button>
+      <Link to={backLinkHref}>
+        <button className={css.button}>
+          <GoArrowLeft className={css.icon} />
+          Go back
+        </button>
+      </Link>
+
       {movieDetails && (
         <div className={css.div}>
           <ul className={css.image}>
@@ -74,8 +78,12 @@ export default function MovieDetailsPage() {
       <div className={css.listAdditionalInfo}>
         <li className={css.additionalInfo}>Additional information</li>
         <nav className={css.navLink}>
-          <Link to="cast">Cast</Link>
-          <Link to="reviews">Reviews</Link>
+          <Link to="cast" state={location}>
+            Cast
+          </Link>
+          <Link to="reviews" state={location}>
+            Reviews
+          </Link>
         </nav>
       </div>
 

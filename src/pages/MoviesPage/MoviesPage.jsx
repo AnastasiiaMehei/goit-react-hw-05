@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import css from "./MoviesPage.module.css";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
-import { ErrorMessage } from "formik";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+// import { useNavigate } from "react-router-dom";
+
 export default function MoviesPage() {
   const [inputValue, setInputValue] = useState("");
   const [searchMovie, setSearchMovie] = useState("");
