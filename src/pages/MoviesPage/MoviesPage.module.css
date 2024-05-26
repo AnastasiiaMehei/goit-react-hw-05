@@ -16,7 +16,11 @@
 }
 .button {
   width: 150px;
-  border: 1px solid grey;
-  background-color: bisque;
+  border: 1px solid black;
   font-size: 25px;
+  color: brown;
+}
+.button:hover {
+  background-color: brown;
+  color: azure;
 }
