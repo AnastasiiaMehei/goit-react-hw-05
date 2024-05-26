@@ -4,21 +4,28 @@ import css from "./MoviesPage.module.css";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesPage() {
-  const [inputValue, setInputValue] = useState("");
-  const [searchMovie, setSearchMovie] = useState("");
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const location = useLocation();
+  const [inputValue, setInputValue] = useState(location.state?.search || "");
+  const [searchMovie, setSearchMovie] = useState(location.state?.search || "");
+  const [filteredMovies, setFilteredMovies] = useState(
+    location.state?.movies || []
+  );
+  const [showResults, setShowResults] = useState(!!location.state?.movies);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
   const handleSearchClick = () => {
     setSearchMovie(inputValue);
     setShowResults(true);
   };
+
   useEffect(() => {
     const searchMovies = async () => {
       try {
@@ -60,7 +67,7 @@ export default function MoviesPage() {
           Search
         </button>
       </div>
-      {showResults && <MovieList movies={filteredMovies} />}{" "}
+      {showResults && <MovieList movies={filteredMovies} />}
     </div>
   );
 }

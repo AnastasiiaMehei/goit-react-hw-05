@@ -1,21 +1,28 @@
 .container {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   gap: 12px;
   list-style: none;
-  padding: 0;
+  margin-left: 15px;
+  padding: 15px;
   margin: 15px;
-  font-size: 35px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+  font-size: 45px;
+  box-shadow: 3px 3px 5px rgba(232, 24, 24, 0.3),
     -1px -1px 5px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(to bottom, red, black);
+  color: white;
 }
 
 .link {
   text-decoration: none;
-  color: black;
+  color: white;
   font-weight: 700;
 }
-
+.link:hover,
+.link:focus {
+  color: black;
+}
 .active {
   color: orangered;
-  text-decoration: underline;
 }
