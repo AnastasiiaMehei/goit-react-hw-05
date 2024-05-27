@@ -8,7 +8,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
@@ -18,6 +18,7 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -48,13 +49,7 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <Link
-        to={location.state?.from?.pathname || "/"}
-        state={{
-          movies: location.state?.movies,
-          search: location.state?.from?.search,
-        }}
-      >
+      <Link to={location.state?.from?.pathname || "/"} state={backLinkRef}>
         <button className={css.button}>
           <GoArrowLeft className={css.icon} />
           Go back
@@ -91,10 +86,10 @@ export default function MovieDetailsPage() {
       <div className={css.listAdditionalInfo}>
         <li className={css.additionalInfo}>Additional information</li>
         <nav className={css.navLink}>
-          <NavLink to="cast" state={{ from: location.state?.from }}>
+          <NavLink to="cast" state={backLinkRef}>
             Cast
           </NavLink>
-          <NavLink to="reviews" state={{ from: location.state?.from }}>
+          <NavLink to="reviews" state={backLinkRef}>
             Reviews
           </NavLink>
         </nav>

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import css from "./MovieCast.module.css";
 import Loader from "../Loader/Loader";
-import { ErrorMessage } from "formik";
 export default function MovieCast() {
   const { movieId } = useParams();
   const [movieCast, setMovieCast] = useState([]);
@@ -35,11 +34,11 @@ export default function MovieCast() {
       fetchMovieCast();
     }
   }, [movieId]);
+  if (isLoading) return <Loader />;
+  if (isError) return <p>Something went wrong.</p>;
 
   return (
     <div className={css.divMovieCast}>
-      {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
       {movieCast.map((actor) => (
         <div className={css.actor} key={actor.id}>
           <img

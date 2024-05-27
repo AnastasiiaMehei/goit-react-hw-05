@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import css from "./MovieReviews.module.css";
 import Loader from "../Loader/Loader";
-import { ErrorMessage } from "formik";
-
 export default function MovieReviews() {
   const { movieId } = useParams();
   const [movieReviews, setMovieReviews] = useState(null);
@@ -35,11 +33,11 @@ export default function MovieReviews() {
       fetchMovieReviews();
     }
   }, [movieId]);
+  if (isLoading) return <Loader />;
+  if (isError) return <p>Something went wrong.</p>;
 
   return (
     <div>
-      {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
       {movieReviews && movieReviews.length > 0 ? (
         movieReviews.map((review) => (
           <div className={css.review} key={review.id}>

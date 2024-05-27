@@ -1,33 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import css from "./MoviesPage.module.css";
 import Loader from "../../components/Loader/Loader";
 import MovieList from "../../components/MovieList/MovieList";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import SearchMovies from "../SearchMovies/SearchMovies";
 
 export default function MoviesPage() {
-  const location = useLocation();
-  const [inputValue, setInputValue] = useState(location.state?.search || "");
-  const [searchMovie, setSearchMovie] = useState(location.state?.search || "");
-  const [filteredMovies, setFilteredMovies] = useState(
-    location.state?.movies || []
-  );
-  const [showResults, setShowResults] = useState(!!location.state?.movies);
+  const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  const handleSearchClick = () => {
-    setSearchMovie(inputValue);
-    setShowResults(true);
-  };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q");
 
   useEffect(() => {
     const searchMovies = async () => {
+      if (!query) {
+        setMovies([]);
+        return;
+      }
       try {
         setIsLoading(true);
         setIsError(false);
@@ -36,38 +27,25 @@ export default function MoviesPage() {
           {
             params: {
               api_key: "1dd5db15c141fa804e026f3ccbe7a215",
-              query: searchMovie,
+              query,
             },
           }
         );
-        setFilteredMovies(response.data.results);
+        setMovies(response.data.results);
       } catch (error) {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
     };
-    if (searchMovie.trim()) {
-      searchMovies();
-    }
-  }, [searchMovie]);
-
+    searchMovies();
+  }, [query]);
   return (
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <div className={css.div}>
-        <input
-          className={css.input}
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-        />
-        <button className={css.button} onClick={handleSearchClick}>
-          Search
-        </button>
-      </div>
-      {showResults && <MovieList movies={filteredMovies} />}
+      <SearchMovies />
+      <MovieList movies={movies} />
     </div>
   );
 }
