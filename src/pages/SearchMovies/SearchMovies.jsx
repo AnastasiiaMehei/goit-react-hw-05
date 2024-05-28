@@ -16,7 +16,8 @@ export default function SearchMovies() {
           className={css.input}
           type="text"
           name="query"
-          defaultValue={query}
+          value={query}
+          onChange={(e) => setSearchParams({ name: e.target.value })}
         />
         <button className={css.button} type="submit">
           Search
