@@ -45,7 +45,7 @@ export default function MoviesPage() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       <SearchMovies />
-      {<MovieList movies={movies} />}
+      {movies.length > 0 && <MovieList movies={movies} />}
     </div>
   );
 }
