@@ -8,7 +8,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react"; // Додайте useRef тут
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
@@ -18,8 +18,7 @@ export default function MovieDetailsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
-  const backLinkRef = useRef(location.state?.from ?? "/");
-
+  const fromLocation = useRef(location.state?.from ?? "/"); // Використовуємо useRef
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
@@ -49,7 +48,9 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <Link to={backLinkRef} state={backLinkRef}>
+      <Link
+        to={fromLocation.current} // Використовуємо useRef для навігації назад
+      >
         <button className={css.button}>
           <GoArrowLeft className={css.icon} />
           Go back
@@ -86,10 +87,10 @@ export default function MovieDetailsPage() {
       <div className={css.listAdditionalInfo}>
         <li className={css.additionalInfo}>Additional information</li>
         <nav className={css.navLink}>
-          <NavLink to="cast" state={backLinkRef}>
+          <NavLink to="cast" state={{ from: location.state?.from }}>
             Cast
           </NavLink>
-          <NavLink to="reviews" state={backLinkRef}>
+          <NavLink to="reviews" state={{ from: location.state?.from }}>
             Reviews
           </NavLink>
         </nav>
