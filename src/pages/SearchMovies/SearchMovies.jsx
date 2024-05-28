@@ -9,6 +9,7 @@ export default function SearchMovies() {
     const input = e.target.elements.query;
     setSearchParams(input.value ? { q: input.value } : {});
   };
+
   return (
     <div className={css.div}>
       <form onSubmit={handleSubmit}>
@@ -16,8 +17,7 @@ export default function SearchMovies() {
           className={css.input}
           type="text"
           name="query"
-          value={query}
-          onChange={(e) => setSearchParams({ name: e.target.value })}
+          defaultValue={query}
         />
         <button className={css.button} type="submit">
           Search
