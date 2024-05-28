@@ -11,9 +11,10 @@ export default function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("q");
+  const query = searchParams.get("query") ?? "";
 
   useEffect(() => {
+    if (query === "") return;
     const searchMovies = async () => {
       if (!query) {
         setMovies([]);
@@ -27,11 +28,10 @@ export default function MoviesPage() {
           {
             params: {
               api_key: "1dd5db15c141fa804e026f3ccbe7a215",
-              query,
             },
           }
         );
-        setMovies(response.data.results);
+        setMovies(response);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -45,7 +45,7 @@ export default function MoviesPage() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       <SearchMovies />
-      <MovieList movies={movies} />
+      {<MovieList movies={movies} />}
     </div>
   );
 }

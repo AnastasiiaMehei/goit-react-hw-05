@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
-
-const SearchMovies = () => {
+import css from "./SearchMovies.module.css";
+export default function SearchMovies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
 
@@ -9,15 +9,19 @@ const SearchMovies = () => {
     const input = e.target.elements.query;
     setSearchParams(input.value ? { q: input.value } : {});
   };
-
   return (
-    <div>
+    <div className={css.div}>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="query" defaultValue={query} />
-        <button type="submit">Search</button>
+        <input
+          className={css.input}
+          type="text"
+          name="query"
+          defaultValue={query}
+        />
+        <button className={css.button} type="submit">
+          Search
+        </button>
       </form>
     </div>
   );
-};
-
-export default SearchMovies;
+}
