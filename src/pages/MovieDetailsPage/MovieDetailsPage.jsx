@@ -49,7 +49,7 @@ export default function MovieDetailsPage() {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <Link to={location.state?.from?.pathname || "/"} state={backLinkRef}>
+      <Link to={backLinkRef} state={backLinkRef}>
         <button className={css.button}>
           <GoArrowLeft className={css.icon} />
           Go back
